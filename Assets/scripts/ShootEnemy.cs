@@ -20,6 +20,8 @@ public class ShootEnemy : MonoBehaviour
 
     public AImov enemy;
 
+    public static bool AIenemy;
+
 
     // Use this for initialization
     void Start()
@@ -59,12 +61,24 @@ public class ShootEnemy : MonoBehaviour
         //    }
         //}
 
-        if (AICharacterControl.AIenemy == false)
+
+        if (curfirerate == 0)
         {
-            Debug.Log("bang");
-            delay = Time.time + 1 / curfirerate;
-            Shot();
+            if (AICharacterControl.AIenemy == false)
+            {
+                Shot();
+            }
         }
+        else
+        {
+            if (AICharacterControl.AIenemy == false && Time.time > delay)
+            {
+                Debug.Log("bang");
+                delay = Time.time + 1 / curfirerate;
+                Shot();
+            }
+        }
+
 
     }
 
