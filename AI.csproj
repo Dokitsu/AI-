@@ -316,9 +316,11 @@
     <Compile Include="Assets\scripts\Enemy.cs" />
     <Compile Include="Assets\scripts\Player.cs" />
     <Compile Include="Assets\scripts\Shoot.cs" />
+    <Compile Include="Assets\scripts\ShootEnemy.cs" />
     <Compile Include="Assets\scripts\State_Default.cs" />
     <Compile Include="Assets\scripts\State_Terror.cs" />
     <Compile Include="Assets\scripts\StateMachine.cs" />
+    <Compile Include="Assets\scripts\TargetPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />

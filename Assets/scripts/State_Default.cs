@@ -12,6 +12,12 @@ public class State_Default : State<AImov>
 
     public static bool AIenemy;
 
+
+    void Start()
+    {
+
+    }
+
     private State_Default()
     {
         if (_Instance != null)
@@ -27,7 +33,7 @@ public class State_Default : State<AImov>
     {
         get
         {
-            if(_Instance == null)
+            if (_Instance == null)
             {
                 new State_Default();
             }
