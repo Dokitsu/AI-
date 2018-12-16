@@ -156,7 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4606221234261930}
   - component: {fileID: 95457925394683506}
-  - component: {fileID: 114698231482404302}
+  - component: {fileID: 114807261493093350}
   m_Layer: 0
   m_Name: rifle
   m_TagString: Untagged
@@ -840,10 +840,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4675198696930224}
-  - component: {fileID: 114073517049584884}
   - component: {fileID: 82494653807322328}
   - component: {fileID: 120891353319544524}
-  m_Layer: 0
+  - component: {fileID: 114863653473116926}
+  m_Layer: 2
   m_Name: muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2218,7 +2218,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1087735007950046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.352, y: 1.103, z: 0.345}
+  m_LocalPosition: {x: 0.352, y: 1.05, z: 0.345}
   m_LocalScale: {x: 0.50000036, y: 0.5, z: 0.5000003}
   m_Children:
   - {fileID: 4190725802203004}
@@ -2307,7 +2307,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532963741291532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.004, y: 0.122, z: 0.58}
+  m_LocalPosition: {x: 0.004, y: 0.122, z: 0.728}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4606221234261930}
@@ -2853,28 +2853,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114073517049584884
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1532963741291532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c1f39dc2136f9e4f83d213da01986ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curfirerate: 10
-  damage: 10
-  sfx: {fileID: 8300000, guid: 21e9e59d6ea3eb241a05fd54fcacf4e9, type: 3}
-  Barrel: {fileID: 4675198696930224}
-  enemymask:
-    serializedVersion: 2
-    m_Bits: 2048
-  terrormask:
-    serializedVersion: 2
-    m_Bits: 1024
-  enemy: {fileID: 0}
 --- !u!114 &114263475754940128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2940,7 +2918,8 @@ MonoBehaviour:
   teroor: 0
   Timer: 0
   second: 0
---- !u!114 &114698231482404302
+  muzzle: {fileID: 1532963741291532}
+--- !u!114 &114807261493093350
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2952,6 +2931,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  muzzle: {fileID: 1532963741291532}
+--- !u!114 &114863653473116926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1532963741291532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b23922f66d25e40b6e1aa033ffff1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curfirerate: 5
+  damage: 10
+  attacking: 0
+  sfx: {fileID: 8300000, guid: 21e9e59d6ea3eb241a05fd54fcacf4e9, type: 3}
+  Barrel: {fileID: 4675198696930224}
+  Player:
+    serializedVersion: 2
+    m_Bits: 2048
+  enemy: {fileID: 0}
 --- !u!120 &120891353319544524
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -2967,7 +2967,7 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 0cee0440e8c8f8243bb90e46d881b5e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

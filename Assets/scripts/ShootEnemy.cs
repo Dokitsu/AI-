@@ -10,17 +10,20 @@ public class ShootEnemy : MonoBehaviour
     public static ShootEnemy ddam;
     public float curfirerate;
     public float damage = 10;
+    public bool attacking;
+
     public AudioClip sfx;
 
     float delay = 0;
     public Transform Barrel;
     private LineRenderer Trace;
 
-    public LayerMask enemymask;
+    public LayerMask Player;
 
     public AImov enemy;
 
     public static bool AIenemy;
+    private Vector3 spread;
 
 
     // Use this for initialization
@@ -29,7 +32,7 @@ public class ShootEnemy : MonoBehaviour
         firerate = this;
         ddam = this;
 
-        Trace = GetComponent<LineRenderer>();
+    Trace = GetComponent<LineRenderer>();
     }
 
     void Awake()
@@ -61,62 +64,58 @@ public class ShootEnemy : MonoBehaviour
         //    }
         //}
 
-
-        if (curfirerate == 0)
+        if (attacking)
         {
-            if (AICharacterControl.AIenemy == false)
+            if (curfirerate == 0)
             {
-                Shot();
+                if (AICharacterControl.AIenemy == false)
+                {
+                    Shot();
+                }
+            }
+            else
+            {
+                if (AICharacterControl.AIenemy == false && Time.time > delay)
+                {
+                    //Debug.Log("bang");
+                    delay = Time.time + 1 / curfirerate;
+                    Shot();
+                }
             }
         }
-        else
-        {
-            if (AICharacterControl.AIenemy == false && Time.time > delay)
-            {
-                Debug.Log("bang");
-                delay = Time.time + 1 / curfirerate;
-                Shot();
-            }
-        }
-
 
     }
 
     IEnumerator RenderTrace(Vector3 hitPoint)
     {
         Trace.enabled = true;
-        Trace.SetPosition(0, Barrel.position);
-        Trace.SetPosition(1, Barrel.position + hitPoint);
+        Trace.SetPosition(0,Barrel.position);
+        Trace.SetPosition(1, (Barrel.position + hitPoint));
         yield return null;
-        Trace.enabled = false;
+        Trace.enabled = true;
     }
 
     public void Shot()
     {
-        Debug.Log("bang");
         float shotDistance = 10000;
 
         Ray ray = new Ray(Barrel.position, Barrel.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, shotDistance, enemymask))
+        if (Physics.Raycast(ray, out hit, shotDistance, Player))
         {
-            if (hit.collider.GetComponent<Enemy>())
+            if (hit.collider.GetComponent<Player>())
             {
-                hit.collider.GetComponent<Enemy>().TakeDamage(damage);
+                hit.collider.GetComponent<Player>().TakeDamage(damage);
             }
 
         }
-
 
         StartCoroutine("RenderTrace", ray.direction * shotDistance);
 
         //Debug.DrawRay(ray.origin, ray.direction * shotDistance, Color.red, 1);
 
         GetComponent<AudioSource>().Play();
-
-
-
 
     }
 }

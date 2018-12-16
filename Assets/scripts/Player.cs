@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class Player : MonoBehaviour {
 
@@ -15,22 +16,16 @@ public class Player : MonoBehaviour {
     public Text wavetxtgo;
     static float wave;
 
-    public virtual void TakeDamage(double dmg)
-    {
-        health -= dmg;
-        healthtxt.text = "Health:" + float.Parse(health.ToString());
-        if (health <= 0)
-        {
-            //wave = WAves.curwave;
-            Die();
-        }
-    }
-
     public virtual void Die()
     {
-        //Destroy(gameObject);
-        Debug.Log("player dead");
-        SceneManager.LoadScene("MenuGO");
+        Destroy(gameObject);
+
+        AICharacterControl enemy = GetComponentInChildren<AICharacterControl>();
+        if (enemy != null)
+        {
+            enemy.Ragdeath();
+        }
+
     }
 
     public void Addscore(float scoreVal)
@@ -44,7 +39,6 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Debug.Log(health);
         hell = this;
         //wave = WAves.curwave;
         scoretxtgo.text = "Score:" + score.ToString();
@@ -60,28 +54,17 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        healthtxt.text = "Health:" + float.Parse(health.ToString());
+        //healthtxt.text = "Health:" + float.Parse(health.ToString());
 
     }
 
-    void OnCollisionStay(Collision bot)
+    public virtual void TakeDamage(float dmg)
     {
-        if (bot.gameObject.tag == "Enemy")
+        health -= dmg;
+        if (health <= 0)
         {
-            TakeDamage(0.1);
-            Debug.Log(health);
+            //Die();
         }
-
-        if (bot.gameObject.tag == "projectile")
-        {
-            TakeDamage(10);
-            Debug.Log(health);
-        }
-        if (bot.gameObject.tag == "moprojectile")
-        {
-            TakeDamage(1);
-            Debug.Log(health);
-        }
-
     }
+
 }
