@@ -9,8 +9,6 @@ public class State_Terror : State<AImov>
 
     private static State_Terror _Instance;
 
-    public static bool AIenemy;
-
     private State_Terror()
     {
         if (_Instance != null)
@@ -38,7 +36,6 @@ public class State_Terror : State<AImov>
     public override void EnterState(AImov _owner)
     {
         Debug.Log("Terror state enter");
-        AICharacterControl.AIenemy = true;
     }
 
     public override void ExitState(AImov _owner)

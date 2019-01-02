@@ -10,8 +10,6 @@ public class State_Default : State<AImov>
 
     private static State_Default _Instance;
 
-    public static bool AIenemy;
-
 
     void Start()
     {
@@ -45,7 +43,6 @@ public class State_Default : State<AImov>
     public override void EnterState(AImov _owner)
     {
         Debug.Log("Default state enter");
-        AICharacterControl.AIenemy = false;
     }
 
     public override void ExitState(AImov _owner)

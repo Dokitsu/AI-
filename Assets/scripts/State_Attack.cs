@@ -8,8 +8,6 @@ public class State_Attack : State<AImov>
 {
     private static State_Attack _Instance;
 
-    public static bool AIenemy;
-
 
     void Start()
     {
@@ -43,7 +41,6 @@ public class State_Attack : State<AImov>
     public override void EnterState(AImov _owner)
     {
         Debug.Log("Attack state enter");
-        AICharacterControl.AIenemy = false;
     }
 
     public override void ExitState(AImov _owner)

@@ -5,17 +5,24 @@ using UnityEngine;
 public class TargetPlayer : MonoBehaviour {
 
 
-    public Transform player;
+    public GameObject playert;
     public GameObject muzzle;
+    public GameObject look;
     private Vector3 spread;
 
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        playert = GameObject.Find("EthanNeck").gameObject;
+
+    }
+
     void Update ()
     {
-        spread = new Vector3(Random.Range(-0.6f, 0.6f), Random.Range(-0.2f, 0.2f) + 1f);
+        spread = new Vector3(Random.Range(-0.6f, 0.6f), Random.Range(-0.2f, 0.2f));
 
-        muzzle.transform.LookAt(player.position + spread);
-        transform.LookAt(player.position);
+        muzzle.transform.LookAt(playert.transform.position + spread);
+        look.transform.LookAt((playert.transform.position) + new Vector3(0,0,0));
+        transform.LookAt(playert.transform.position);
     }
 }

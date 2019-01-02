@@ -2885,6 +2885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   Raggy: {fileID: 1159509676349888, guid: af75bb5a11c6d0648b6cb461131cbfe6, type: 2}
+  AIenemy: 0
 --- !u!114 &114520649705887806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2943,15 +2944,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b23922f66d25e40b6e1aa033ffff1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Control: {fileID: 0}
   curfirerate: 5
   damage: 10
   attacking: 0
   sfx: {fileID: 8300000, guid: 21e9e59d6ea3eb241a05fd54fcacf4e9, type: 3}
   Barrel: {fileID: 4675198696930224}
+  Trace: {fileID: 120891353319544524}
   Player:
     serializedVersion: 2
     m_Bits: 2048
   enemy: {fileID: 0}
+  ty: 0
 --- !u!120 &120891353319544524
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -6,6 +6,8 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class ShootEnemy : MonoBehaviour
 {
 
+    public AICharacterControl Control;
+
     public static ShootEnemy firerate;
     public static ShootEnemy ddam;
     public float curfirerate;
@@ -16,23 +18,26 @@ public class ShootEnemy : MonoBehaviour
 
     float delay = 0;
     public Transform Barrel;
-    private LineRenderer Trace;
+    public Transform Look;
+    public LineRenderer Trace;
 
     public LayerMask Player;
 
     public AImov enemy;
-
-    public static bool AIenemy;
     private Vector3 spread;
+
+    public bool ty;
 
 
     // Use this for initialization
     void Start()
     {
+        Control = GetComponent<AICharacterControl>();
+        ty = Control.AIenemy;
         firerate = this;
         ddam = this;
 
-    Trace = GetComponent<LineRenderer>();
+        Trace = gameObject.GetComponent<LineRenderer>();
     }
 
     void Awake()
@@ -66,20 +71,28 @@ public class ShootEnemy : MonoBehaviour
 
         if (attacking)
         {
-            if (curfirerate == 0)
+            Ray looking = new Ray(Look.position, Look.forward);
+            RaycastHit hit;
+            if (Physics.Raycast(looking, out hit, 1000, Player))
             {
-                if (AICharacterControl.AIenemy == false)
+                if (hit.collider.GetComponent<Player>())
                 {
-                    Shot();
-                }
-            }
-            else
-            {
-                if (AICharacterControl.AIenemy == false && Time.time > delay)
-                {
-                    //Debug.Log("bang");
-                    delay = Time.time + 1 / curfirerate;
-                    Shot();
+                    if (curfirerate == 0)
+                    {
+                        if (ty == false)
+                        {
+                            Shot();
+                        }
+                    }
+                    else
+                    {
+                        if (ty == false && Time.time > delay)
+                        {
+                            //Debug.Log("bang");
+                            delay = Time.time + 1 / curfirerate;
+                            Shot();
+                        }
+                    }
                 }
             }
         }

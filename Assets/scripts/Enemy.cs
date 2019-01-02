@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour {
             AICharacterControl enemy = GetComponentInChildren<AICharacterControl>();
             if(enemy != null)
             {
+                player.Addscore(scoreVal);
                 enemy.Ragdeath();
             }
 

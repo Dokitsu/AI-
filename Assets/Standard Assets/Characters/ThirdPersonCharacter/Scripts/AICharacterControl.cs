@@ -15,7 +15,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public GameObject Raggy;
 
-        public static bool AIenemy;
+        public bool AIenemy;
 
         private void Start()
         {
@@ -23,10 +23,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
 
-	        agent.updateRotation = false;
+            agent.updateRotation = false;
 	        agent.updatePosition = true;
-
-            AIenemy = this;
             AIenemy = false;
         }
 

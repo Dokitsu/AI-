@@ -71,6 +71,7 @@ public class AImov : MonoBehaviour {
         if(second == 5)
         {
             teroor = false;
+            Control.AIenemy = false;
             second = 0;
         }
 
@@ -99,9 +100,11 @@ public class AImov : MonoBehaviour {
     public void shotat()
     {
         teroor = true;
+        Control.AIenemy = true;
         stateMachine.ChangeState(State_Terror.Instance);
         second = 0;
         Timer = Time.time;
+
     }
 
 

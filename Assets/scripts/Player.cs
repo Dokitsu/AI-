@@ -30,8 +30,7 @@ public class Player : MonoBehaviour {
 
     public void Addscore(float scoreVal)
     {
-        float healthmultiplyer = (float)health;
-        score = score + (scoreVal * healthmultiplyer);
+        score = score + (scoreVal);
         Debug.Log("score:"+score+"!");
         scoretxt.text = "Score:" + score.ToString();
     }
@@ -40,7 +39,6 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
         hell = this;
-        //wave = WAves.curwave;
         scoretxtgo.text = "Score:" + score.ToString();
         wavetxtgo.text = "you got to wave " + wave.ToString()+"/9";
         healthtxt.text = "Health:" + health.ToString();
@@ -54,8 +52,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //healthtxt.text = "Health:" + float.Parse(health.ToString());
-
+        healthtxt.text = "Health:" + float.Parse(health.ToString());
     }
 
     public virtual void TakeDamage(float dmg)
