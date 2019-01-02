@@ -7,11 +7,12 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class State_Attack : State<AImov>
 {
     private static State_Attack _Instance;
-
+    public EnemyManager eman;
+    public bool attack;
 
     void Start()
     {
-
+        eman = GameObject.Find("EnemyMan").GetComponent<EnemyManager>();
     }
 
     private State_Attack()
@@ -41,6 +42,15 @@ public class State_Attack : State<AImov>
     public override void EnterState(AImov _owner)
     {
         Debug.Log("Attack state enter");
+
+        if (eman.canattack() == true)
+        {
+
+        }
+        else
+        {
+            _owner.stateMachine.ChangeState(State_Default.Instance);
+        }
     }
 
     public override void ExitState(AImov _owner)
