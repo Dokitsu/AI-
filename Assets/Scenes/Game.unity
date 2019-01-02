@@ -3354,7 +3354,7 @@ GameObject:
   - component: {fileID: 2035539173}
   m_Layer: 0
   m_Name: EnemyMan
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3384,7 +3384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
-  attack: 0
+  ticket: 0
 --- !u!1001 &2115347419
 Prefab:
   m_ObjectHideFlags: 0

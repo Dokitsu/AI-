@@ -19,7 +19,7 @@ public class AImov : MonoBehaviour {
     public int second =0;
 
     public GameObject muzzle;
-
+   
     // Use this for initialization
     void Start ()
     {
@@ -31,6 +31,7 @@ public class AImov : MonoBehaviour {
         stateMachine.ChangeState(State_Default.Instance);
         Timer = Time.time;
     }
+
 
     void Findcover()
     {
@@ -55,16 +56,17 @@ public class AImov : MonoBehaviour {
         }
         targetpos = hit.position;
 
-        if (Input.GetKeyDown("space"))
-        {
-            print("Finding cover");
-            Findcover();
-        }
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    print("Finding cover");
+        //    Findcover();
+        //}
 
 
         if(Time.time > Timer + 1)
         {
             Timer = Time.time;
+            Findcover();
             second++;
         }
 
@@ -81,21 +83,13 @@ public class AImov : MonoBehaviour {
             {
                 stateMachine.ChangeState(State_Attack.Instance);
                 second = 0;
-                StartCoroutine(attack());
+
             }
         }
-
 
         stateMachine.Update();
     }
 
-    IEnumerator attack()
-    {
-        muzzle.gameObject.GetComponent<ShootEnemy>().attacking = true;
-        yield return new WaitForSeconds(2);
-        muzzle.gameObject.GetComponent<ShootEnemy>().attacking = false;
-        stateMachine.ChangeState(State_Default.Instance);
-    }
 
     public void shotat()
     {

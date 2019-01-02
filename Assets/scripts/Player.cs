@@ -37,6 +37,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
         hell = this;
+        score = 0;
         scoretxtgo.text = "Score:" + score.ToString();
         healthtxt.text = "Health:" + health.ToString();
         scoreup();

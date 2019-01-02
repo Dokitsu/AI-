@@ -6,12 +6,12 @@ public class EnemyManager : MonoBehaviour {
 
     public List<GameObject> enemies = new List<GameObject>();
 
-    public bool attack;
+    public int ticket;
 
     // Use this for initialization
     void Start ()
     {
-		
+        ticket = 4;
 	}
 	
 	// Update is called once per frame
@@ -31,10 +31,22 @@ public class EnemyManager : MonoBehaviour {
         //adding a ticket system to the game
     }
 
+    public void ticketreturn()
+    {
+        ticket += 1;
+    }
+
     public bool canattack()
     {
-        attack = true;
-        return attack;
+        if(ticket > 0)
+        {
+            ticket -= 1;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
  

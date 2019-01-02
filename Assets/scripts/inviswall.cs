@@ -19,7 +19,6 @@ public class inviswall : MonoBehaviour {
         if (collision.gameObject.layer == 9)
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
-            Debug.Log("test");
         }
     }
 }
