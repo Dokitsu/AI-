@@ -833,11 +833,11 @@ GameObject:
   - component: {fileID: 114998876293884168}
   m_Layer: 9
   m_Name: AIThirdPersonController
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1612190004679924
 GameObject:
   m_ObjectHideFlags: 1
@@ -1243,6 +1243,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1896509990896622
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4085633489816862}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1900945141452908
 GameObject:
   m_ObjectHideFlags: 1
@@ -1379,6 +1394,7 @@ Transform:
   - {fileID: 4115970343059324}
   - {fileID: 4616201510361194}
   - {fileID: 4371505612866110}
+  - {fileID: 4085633489816862}
   m_Father: {fileID: 4573247623883700}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1533,6 +1549,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4901724289073782}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4085633489816862
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1896509990896622}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7, y: 0, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4017359324592524}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4102962515471042
 Transform:
@@ -2887,10 +2916,11 @@ MonoBehaviour:
   attacking: 0
   sfx: {fileID: 8300000, guid: 21e9e59d6ea3eb241a05fd54fcacf4e9, type: 3}
   Barrel: {fileID: 4371505612866110}
+  Look: {fileID: 4085633489816862}
   Trace: {fileID: 120366814194439368}
   Player:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2049
   enemy: {fileID: 0}
   ty: 0
 --- !u!114 &114630903056542220
@@ -2923,8 +2953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17ffb1a837c1214ba2d57d23bbeb529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playert: {fileID: 0}
   muzzle: {fileID: 1389768308512734}
+  look: {fileID: 1896509990896622}
 --- !u!114 &114991226517581512
 MonoBehaviour:
   m_ObjectHideFlags: 1

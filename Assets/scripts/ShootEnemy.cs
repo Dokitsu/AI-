@@ -75,6 +75,7 @@ public class ShootEnemy : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(looking, out hit, 1000, Player))
             {
+                //Debug.Log(hit);
                 if (hit.collider.GetComponent<Player>())
                 {
                     if (curfirerate == 0)

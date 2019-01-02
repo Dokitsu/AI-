@@ -13,8 +13,8 @@ public class TargetPlayer : MonoBehaviour {
 
     private void Awake()
     {
-        playert = GameObject.Find("EthanNeck").gameObject;
-
+        playert = GameObject.FindWithTag("Player").gameObject.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(2).gameObject;
+        Debug.Log(playert);
     }
 
     void Update ()

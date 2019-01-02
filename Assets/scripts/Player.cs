@@ -13,8 +13,6 @@ public class Player : MonoBehaviour {
     public Text scoretxt;
     public Text healthtxt;
     public Text scoretxtgo;
-    public Text wavetxtgo;
-    static float wave;
 
     public virtual void Die()
     {
@@ -40,7 +38,6 @@ public class Player : MonoBehaviour {
     void Start () {
         hell = this;
         scoretxtgo.text = "Score:" + score.ToString();
-        wavetxtgo.text = "you got to wave " + wave.ToString()+"/9";
         healthtxt.text = "Health:" + health.ToString();
         scoreup();
     }
