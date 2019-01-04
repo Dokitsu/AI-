@@ -44,38 +44,34 @@ public class State_Attack : State<AImov>
         Debug.Log("Attack state enter");
         eman = GameObject.FindWithTag("Manager").GetComponent<EnemyManager>();
 
-        if (eman.canattack() == true)
+        if (_owner.muzzle.gameObject.GetComponent<ShootEnemy>().cansee == true)
         {
-            help.StartCoroutine((Shoot(_owner)));
-            _owner.stateMachine.ChangeState(State_Default.Instance);
+            if (eman.canattack() == true)
+            {
+                _owner.Shoot(_owner);
+                _owner.stateMachine.ChangeState(State_Default.Instance);
+            }
+            else
+            {
+                //eman.ticketreturn();
+                _owner.stateMachine.ChangeState(State_Default.Instance);
+            }
         }
-        else
-        {
-            _owner.stateMachine.ChangeState(State_Default.Instance);
-        }
-    }
 
-    public IEnumerator Shoot(AImov _owner)
-    {
-        _owner.gameObject.GetComponent<ShootEnemy>().attacking = true;
-        yield return new WaitForSeconds(2);
-        _owner.gameObject.GetComponent<ShootEnemy>().attacking = false;
-        _owner.stateMachine.ChangeState(State_Default.Instance);
-        eman.ticketreturn();
     }
 
 
     public override void ExitState(AImov _owner)
     {
-        Debug.Log("Attack state exit");
-        eman.ticketreturn();
+        //Debug.Log("Attack state exit");
+        //eman.ticketreturn();
     }
 
     public override void UpdateState(AImov _owner)
     {
         if (_owner.teroor)
         {
-            eman.ticketreturn();
+            //eman.ticketreturn();
             _owner.stateMachine.ChangeState(State_Terror.Instance);
         }
     }

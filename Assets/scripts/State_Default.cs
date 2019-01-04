@@ -47,7 +47,7 @@ public class State_Default : State<AImov>
 
     public override void ExitState(AImov _owner)
     {
-        Debug.Log("Defualt state exit");
+        //Debug.Log("Defualt state exit");
     }
 
     public override void UpdateState(AImov _owner)

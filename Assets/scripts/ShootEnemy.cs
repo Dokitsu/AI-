@@ -11,7 +11,7 @@ public class ShootEnemy : MonoBehaviour
     public static ShootEnemy firerate;
     public static ShootEnemy ddam;
     public float curfirerate;
-    public float damage = 10;
+    public float damage;
     public bool attacking;
 
     public AudioClip sfx;
@@ -20,6 +20,8 @@ public class ShootEnemy : MonoBehaviour
     public Transform Barrel;
     public Transform Look;
     public LineRenderer Trace;
+
+    public bool cansee;
 
     public LayerMask Player;
 
@@ -33,7 +35,7 @@ public class ShootEnemy : MonoBehaviour
     void Start()
     {
         Control = GetComponent<AICharacterControl>();
-        ty = Control.AIenemy;
+        //ty = Control.AIenemy;
         firerate = this;
         ddam = this;
 
@@ -69,12 +71,26 @@ public class ShootEnemy : MonoBehaviour
         //    }
         //}
 
-        if (attacking)
+        Ray looking = new Ray(Look.position, Look.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(looking, out hit, 1000, Player))
         {
-            Ray looking = new Ray(Look.position, Look.forward);
-            RaycastHit hit;
-            if (Physics.Raycast(looking, out hit, 1000, Player))
+            if (hit.collider.GetComponent<Player>())
             {
+                cansee = true;
+            }
+            else
+            {
+                cansee = false;
+            }
+        }
+
+            if (attacking)
+        {
+            //Ray looking = new Ray(Look.position, Look.forward);
+            //RaycastHit hit;
+            //if (Physics.Raycast(looking, out hit, 1000, Player))
+            //{
                 //Debug.Log(hit);
                 if (hit.collider.GetComponent<Player>())
                 {
@@ -94,7 +110,7 @@ public class ShootEnemy : MonoBehaviour
                             Shot();
                         }
                     }
-                }
+                //}
             }
         }
 
@@ -106,7 +122,7 @@ public class ShootEnemy : MonoBehaviour
         Trace.SetPosition(0,Barrel.position);
         Trace.SetPosition(1, (Barrel.position + hitPoint));
         yield return null;
-        Trace.enabled = true;
+        Trace.enabled = false;
     }
 
     public void Shot()

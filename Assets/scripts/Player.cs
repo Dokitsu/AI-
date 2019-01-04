@@ -14,6 +14,9 @@ public class Player : MonoBehaviour {
     public Text healthtxt;
     public Text scoretxtgo;
 
+    public float Timer;
+    public int second = 0;
+
     public virtual void Die()
     {
         Destroy(gameObject);
@@ -41,6 +44,8 @@ public class Player : MonoBehaviour {
         scoretxtgo.text = "Score:" + score.ToString();
         healthtxt.text = "Health:" + health.ToString();
         scoreup();
+
+        Timer = Time.time;
     }
 
     void scoreup()
@@ -50,11 +55,47 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        healthtxt.text = "Health:" + float.Parse(health.ToString());
+        healthtxt.text = "Health:" + float.Parse(health.ToString("F0"));
+
+        if (Time.time > Timer + 1)
+        {
+            Timer = Time.time;
+            second++;
+        }
+
+        if (second >= 2)
+        {
+            if(health < 100)
+            {
+                health += Time.deltaTime;
+            }
+        }
+        if (second >= 4)
+        {
+            if (health < 100)
+            {
+                health += Time.deltaTime * 10;
+            }
+        }
+        if (second >= 6)
+        {
+            if (health < 100)
+            {
+                health += Time.deltaTime * 20;
+            }
+        }
+        if (second >= 8)
+        {
+            if (health < 100)
+            {
+                health += Time.deltaTime * 20;
+            }
+        }
     }
 
     public virtual void TakeDamage(float dmg)
     {
+        second = 0;
         health -= dmg;
         if (health <= 0)
         {

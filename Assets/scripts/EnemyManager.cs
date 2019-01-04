@@ -27,14 +27,13 @@ public class EnemyManager : MonoBehaviour {
         {
             enemies.Add(i);
         }
-
-        //adding a ticket system to the game
     }
 
     public void ticketreturn()
     {
         ticket += 1;
     }
+
 
     public bool canattack()
     {

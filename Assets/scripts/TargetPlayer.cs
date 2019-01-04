@@ -8,13 +8,14 @@ public class TargetPlayer : MonoBehaviour {
     public GameObject playert;
     public GameObject muzzle;
     public GameObject look;
+    public GameObject look2;
     private Vector3 spread;
 
 
     private void Awake()
     {
         playert = GameObject.FindWithTag("Player").gameObject.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(2).gameObject;
-        Debug.Log(playert);
+        //Debug.Log(playert);
     }
 
     void Update ()
@@ -23,6 +24,7 @@ public class TargetPlayer : MonoBehaviour {
 
         muzzle.transform.LookAt(playert.transform.position + spread);
         look.transform.LookAt((playert.transform.position) + new Vector3(0,0,0));
+        look2.transform.LookAt((playert.transform.position) + new Vector3(0, 0, 0));
         transform.LookAt(playert.transform.position);
     }
 }
