@@ -21,16 +21,26 @@ public class AImov : MonoBehaviour {
 
     public GameObject muzzle;
     public GameObject fov;
+    public GameObject point;
 
     public LayerMask Player;
 
     public EnemyManager eman;
+    public Transform playert;
 
-    // Use this for initialization
+    public float distance;
+
+
+    private void Awake()
+    {
+        point = Instantiate(fov, transform.position, transform.rotation);
+        playert = GameObject.FindWithTag("Player").gameObject.transform;
+        targetpos = new Vector3(0, 0f, 0);
+    }
     void Start ()
     {
         Control = GetComponent<AICharacterControl>();
-        targetpos = this.transform.position;
+        //targetpos = this.transform.position;
         Control.SetTarget(targetpos);
 
         stateMachine = new StateMachine<AImov>(this);
@@ -41,6 +51,68 @@ public class AImov : MonoBehaviour {
 
     void Findcover()
     {
+        //https://docs.unity3d.com/530/Documentation/ScriptReference/NavMesh.GetAreaFromName.html
+        int CoverMask = 1 << NavMesh.GetAreaFromName("Cover");
+        NavMeshHit hit;
+        //if (NavMesh.SamplePosition(transform.position, out hit, 200.0f, CoverMask))
+        //{
+        //    //Debug.DrawRay(hit.position, Vector3.up, Color.blue);
+        //    //Debug.Log(hit.position);
+        //}
+
+        //if (second == 1)
+        //{
+        //    randomPoint = transform.position + Random.insideUnitSphere * 10;
+        //}
+        //Debug.DrawRay(randomPoint, Vector3.up, Color.blue);
+
+        //if (muzzle.gameObject.GetComponent<ShootEnemy>().cansee == false)
+        //{
+        //    targetpos = randomPoint;
+        //}
+        //else
+        //{
+        //    targetpos = hit.position;
+        //}
+
+        if(point == null)
+        {
+        }
+
+        randomPoint = transform.position + Random.insideUnitSphere * 100;
+
+        Ray ray = new Ray(point.transform.position, point.transform.forward);
+        Debug.DrawRay(point.transform.position, point.transform.forward, Color.blue);
+        RaycastHit hit4;
+        distance = Vector3.Distance(playert.transform.position, point.transform.position);
+
+        if (Physics.Raycast(ray, out hit4, 1000, Player))
+        {
+            if (hit4.collider.GetComponent<Player>())
+            {
+                //NavMeshHit hit;
+                Debug.Log("HII");
+                if (NavMesh.SamplePosition(randomPoint, out hit, 500.0f, CoverMask))
+                {
+                    Debug.DrawRay(hit.position, Vector3.up, Color.blue);
+                    targetpos = hit.position;
+
+                    //Findcover();
+                }
+            }
+        }
+
+        //if (NavMesh.SamplePosition(randomPoint, out hit, 500.0f, CoverMask) && Vector3.Distance(playert.transform.position, transform.position) > 10)
+        //{
+        //    Debug.DrawRay(hit.position, Vector3.up, Color.blue);
+        //    targetpos = hit.position;
+        //    //Findcover();
+        //}
+
+
+
+
+        //targetpos = hit.position;
         Setpos();
     }
 
@@ -52,48 +124,8 @@ public class AImov : MonoBehaviour {
     // Update is called once per frame
     private void Update()
     {
-        //https://docs.unity3d.com/530/Documentation/ScriptReference/NavMesh.GetAreaFromName.html
-        int CoverMask = 1 << NavMesh.GetAreaFromName("Cover");
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(transform.position, out hit, 200.0f, CoverMask))
-        {
-            //Debug.DrawRay(hit.position, Vector3.up, Color.blue);
-            //Debug.Log(hit.position);
-        }
-
-        if(second == 1)
-        {
-            randomPoint = transform.position + Random.insideUnitSphere * 10;
-        }
-        Debug.DrawRay(randomPoint, Vector3.up, Color.blue);
-
-        if (muzzle.gameObject.GetComponent<ShootEnemy>().cansee == false)
-        {
-            targetpos = randomPoint;
-        }
-        else
-        {
-            targetpos = hit.position;
-        }
-
-
-        Ray ray = new Ray(fov.transform.position, fov.transform.forward);
-        RaycastHit hit4;
-        if (Physics.Raycast(ray, out hit4, 100, Player))
-        {
-            if (hit4.collider.GetComponent<Player>())
-            {
-                if (NavMesh.SamplePosition(randomPoint, out hit, 200.0f, CoverMask))
-                {
-                    Debug.DrawRay(hit.position, Vector3.up, Color.blue);
-                    //Debug.Log(hit.position);
-                    targetpos = hit.position;
-                }
-
-            }
-
-        }
-
+        point.transform.LookAt((playert.transform.position) + new Vector3(0, 0.5f, 0));
+        point.transform.position = targetpos + new Vector3(0, 0.5f, 0);
 
         //if (Input.GetKeyDown("space"))
         //{
@@ -101,11 +133,11 @@ public class AImov : MonoBehaviour {
         //    Findcover();
         //}
 
-
         if (Time.time > Timer + 1)
         {
             Timer = Time.time;
             Findcover();
+            Setpos();
             second++;
         }
 

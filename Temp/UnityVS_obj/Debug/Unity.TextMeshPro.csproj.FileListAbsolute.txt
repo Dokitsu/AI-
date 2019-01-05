@@ -1,2 +1,0 @@
-X:\Unity Projects\AI\Temp\UnityVS_obj\Debug\Unity.TextMeshPro.csprojResolveAssemblyReference.cache
-X:\Unity Projects\AI\Temp\UnityVS_obj\Debug\Unity.TextMeshPro.csproj.CoreCompileInputs.cache

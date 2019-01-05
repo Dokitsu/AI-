@@ -12,19 +12,34 @@ public class Player : MonoBehaviour {
     static float score;
     public Text scoretxt;
     public Text healthtxt;
-    public Text scoretxtgo;
+    //public Text scoretxtgo;
+
+    public GameObject Raggy;
+
+    public Button reset;
 
     public float Timer;
     public int second = 0;
 
+    public bool go = false;
+
     public virtual void Die()
     {
-        Destroy(gameObject);
-
-        AICharacterControl enemy = GetComponentInChildren<AICharacterControl>();
-        if (enemy != null)
+        if (go == false)
         {
-            enemy.Ragdeath();
+            go = true;
+            Destroy(transform.GetChild(0).gameObject);
+            Destroy(transform.GetChild(1).gameObject);
+            Destroy(transform.GetChild(2).gameObject);
+            Destroy(transform.GetChild(3).GetChild(1).gameObject);
+            GetComponent<ThirdPersonCharacter>().enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+            Destroy(GetComponent<Rigidbody>());
+
+            GameObject rag = Instantiate(Raggy, transform.root.transform.position, Quaternion.identity) as GameObject;
+
+            reset.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
 
     }
@@ -41,7 +56,8 @@ public class Player : MonoBehaviour {
     void Start () {
         hell = this;
         score = 0;
-        scoretxtgo.text = "Score:" + score.ToString();
+        //scoretxtgo.text = "Score:" + score.ToString();
+        scoretxt.text = "Score:" + score.ToString();
         healthtxt.text = "Health:" + health.ToString();
         scoreup();
 
@@ -99,7 +115,7 @@ public class Player : MonoBehaviour {
         health -= dmg;
         if (health <= 0)
         {
-            //Die();
+            Die();
         }
     }
 

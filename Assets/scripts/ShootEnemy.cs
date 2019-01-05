@@ -122,7 +122,7 @@ public class ShootEnemy : MonoBehaviour
         Trace.SetPosition(0,Barrel.position);
         Trace.SetPosition(1, (Barrel.position + hitPoint));
         yield return null;
-        Trace.enabled = false;
+        //Trace.enabled = false;
     }
 
     public void Shot()

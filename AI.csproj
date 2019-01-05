@@ -311,6 +311,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\scripts\AImov.cs" />
+    <Compile Include="Assets\scripts\Buttons.cs" />
     <Compile Include="Assets\scripts\CameraCollision.cs" />
     <Compile Include="Assets\scripts\CameraFollow.cs" />
     <Compile Include="Assets\scripts\Enemy.cs" />
